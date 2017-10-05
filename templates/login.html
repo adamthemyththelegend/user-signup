@@ -7,25 +7,25 @@
 <form action="/welcome" method='POST'>
     <label>
         Username:
+        {% if usererror %}
+        {{ usererror }}
+        {% endif %}
         <input type="text" name="username" value="{{ request.form['username'] }}" />
     </label>
-    {% if usererror %}
-    <p class='error'>{{ usererror }}</p>
-    {% endif %}
     <br>
     <label>
         Password:
+        {% if nopasserror %}
+        {{ nopasserror }}
+        {% endif %}
         <input type="password" name="password" />
     </label>
-    {% if nopasserror %}
-    <p class='error'>{{ nopasserror }}</p>
-    {% endif %}
-    {% if passerror %}
-    <p class='error'>{{ passerror }}</p>
-    {% endif %}
     <br>
     <label>
         Verify Password:
+        {% if passerror %}
+        {{ passerror }}
+        {% endif %}  
         <input type="password" name="passwordverify" />
     </label>
     <br>
