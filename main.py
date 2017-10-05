@@ -11,18 +11,18 @@ def welcome():
     password = request.form['password']
     verifypassword = request.form['passwordverify']
     if len(username) < 3 or len(username) > 20:
-        nameerror = "<p class='error'>Please choose a username between 3 and 20 characters.</p>"
-        return render_template('login.html') + nameerror
+        nameerror = "Please choose a username between 3 and 20 characters."
+        return render_template('login.html', usererror=nameerror)
     for character in username:
         if character == " ":
-            nameerror = "<p class='error'>Your username cannot contain any spaces.</p>"
-            return render_template('login.html') + nameerror
+            nameerror = "Your username cannot contain any spaces."
+            return render_template('login.html', usererror=nameerror)
     if (not password) or (password.strip() == ""):
-        nopwerror = "<p class='error'>Please enter a password.</p>"
-        return render_template('login.html') + nopwerror
+        nopwerror = "Please enter a password."
+        return render_template('login.html', nopasserror=nopwerror)
     if password != verifypassword:
-        pwerror = "<p class='error'>Your passwords do not match.</p>"
-        return render_template('login.html') + pwerror
+        pwerror = "Your passwords do not match."
+        return render_template('login.html', passerror=pwerror)
     return render_template('welcome.html', username=username)
 
 
@@ -32,7 +32,7 @@ def index():
     usererror = request.args.get("nameerror")
     nopasserror = request.args.get("nopwerror")
     passerror = request.args.get("pwerror")
-    return render_template('login.html',
+    return render_template('login.html', 
     usererror=usererror and cgi.escape(usererror, quote=True), 
     nopasserror=nopasserror and cgi.escape(nopasserror, quote=True), 
     passerror=passerror and cgi.escape(passerror, quote=True))
